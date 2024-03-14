@@ -3,7 +3,7 @@ import { clothes } from "./data/clothes";
 
 export default function Bride() {
     const brideClothes = clothes.filter(item => item.type === 'Bride');
-
+//hii
     return (
         <div>
             <h1>Bride Collection</h1>
