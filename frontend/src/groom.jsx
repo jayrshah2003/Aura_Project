@@ -2,7 +2,7 @@ import ClothCard from './ClothCard';
 import { clothes } from "./data/clothes"; 
 
 export default function Groom() {
-    //hi
+    
     const groomClothes = clothes.filter(item => item.type === 'Groom');
 
     return (
