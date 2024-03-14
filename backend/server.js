@@ -10,7 +10,7 @@ const db_uri = "mongodb+srv://jayrshah255:jayrshah255@cluster0.dclrmna.mongodb.n
 server.use(express.urlencoded({extended:false}))
 server.use(express.json())
 server.use(cors())
-
+//hi
 
 mongoose.connect(db_uri).then((result) => {
     server.listen(port, () => {
