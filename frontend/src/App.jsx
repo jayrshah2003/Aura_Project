@@ -1,13 +1,16 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-import "./App.css";
-import Bride from "./bride";
+
+
+import './App.css'
+import Bride from './bride'
 import Cocktail from "./cocktail";
 import Dolce from "./d&g";
 import Groom from "./groom";
 import Gucci from "./gucci";
 import Lacoste from "./lacoste";
 import Workattire from "./work";
+
 import Login from "./Login";
 //hii
 function App() {
