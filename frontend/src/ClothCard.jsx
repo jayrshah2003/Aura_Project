@@ -1,4 +1,5 @@
-export default function ClothCard({name, price, size, image, brand,}){
+
+export default function ClothCard({name, price, size, image, brand,onRentClick}){
 
     return(
         
@@ -9,10 +10,12 @@ export default function ClothCard({name, price, size, image, brand,}){
             <h3>{size}</h3>
             <h4>{brand}</h4>
             <h5>{price}</h5>
+            
+            <button onClick={onRentClick} >Rent</button>
+            
 
-            <button className="Add-Button">Rent</button>
 
-
+            
            
         </div>
     )

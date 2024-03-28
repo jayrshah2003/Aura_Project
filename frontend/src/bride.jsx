@@ -1,11 +1,32 @@
+import { Link } from 'react-router-dom';
 import ClothCard from './ClothCard';
 import { clothes } from "./data/clothes"; 
+// import { useState } from "react";
+
+// import { useNavigate } from 'react-router-dom';
+
 
 export default function Bride() {
     const brideClothes = clothes.filter(item => item.type === 'Bride');
-//hii
+    // const [cartList, setCartList] = useState([]);
+
+    // // const navigate = useNavigate();
+
+    // const handleAddToCart = (item) => {
+    //     setCartList((prevList) => {
+    //       return [...prevList, { ...item, id: crypto.randomUUID() }];
+    //     });
+    //   };
+
     return (
         <div>
+            < img src = "/image/AuraLogo.png" alt="logo" width ="200" />
+
+            <Link to = "/main">
+                <button className="Backtohome">
+                Home
+                </button>
+            </Link>
             <h1>Bride Collection</h1>
             <div className="inventory-container">
                 {brideClothes.map(item => (
@@ -16,9 +37,12 @@ export default function Bride() {
                         size={item.size}
                         image={item.image}
                         brand={item.brand}
-                    />                 
+                        // onRentClick={() => handleAddToCart(item)}
+                    />          
+                           
                     
                 ))}
+                
             </div>
         </div>
     );
