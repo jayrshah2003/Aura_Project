@@ -7,6 +7,7 @@ const AURA = require("./models/aura")
 const User = require("./models/user")
 const port = 3000;
 const bcrypt = require("bcrypt")
+const jwt = require("jsonwebtoken")
 const db_uri = "mongodb+srv://jayrshah255:jayrshah255@cluster0.dclrmna.mongodb.net/AURA?retryWrites=true&w=majority&appName=Cluster0"
 
 
@@ -39,6 +40,7 @@ server.post("/register", async(request,response) => {
 
 server.post("/login", async (request,response) => {
     const {username, password} = request.body
+    const jwtToken = jwt.sign({id: username}, "token")
     await User.findOne({username}).then((user) => {
         if(user){
             bcrypt.compare(password, user.password, (err, res) => {
@@ -46,15 +48,15 @@ server.post("/login", async (request,response) => {
                     response.send(err)
                 }
                 if(res){
-                    response.send("You are loged in!!!")
+                    response.send({message:"You are loged in!!!", token : jwtToken})
                 }
                 else{
-                    response.send("Bad authentication")
+                    response.send({message:"Bad authentication"})
                 }
             })
         }
         else{
-            response.send("Username does not exist")
+            response.send({message:"Username does not exist"})
         }
 
     })

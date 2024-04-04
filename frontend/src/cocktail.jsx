@@ -3,7 +3,7 @@ import { clothes } from "./data/clothes";
 import { Link } from 'react-router-dom';
 
 
-export default function Cocktail() {
+export default function Cocktail({addToCart}) {
     const cocktailClothes = clothes.filter(item => item.type === 'Cocktail');
 
     return (
@@ -16,15 +16,19 @@ export default function Cocktail() {
             </Link>
             <h1>Cocktail Collection</h1>
             <div className="inventory-container">
-                {cocktailClothes.map(item => (
-                    <ClothCard
-                        key={item.id}
-                        name={item.name}
-                        price={item.price}
-                        size={item.size}
-                        image={item.image}
-                        brand={item.brand}
-                    />                 
+        {cocktailClothes.map((item) => (
+          <div className="productCard" key={item.id}>
+            <ClothCard
+              key={item.id}
+              name={item.name}
+              price={item.price}
+              size={item.size}
+              image={item.image}
+              brand={item.brand}
+              addToCart={addToCart}     
+                    
+            />
+          </div>             
                     
                 ))}
             </div>

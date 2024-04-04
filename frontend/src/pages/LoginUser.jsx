@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Cookies from "js-cookie"
 
 
 
@@ -12,8 +13,13 @@ export default function LoginUser(){
 
     })
 
-    const [postResponse, setPostResponse] = useState()
+    const [postResponse, setPostResponse] = useState("")
+    const [jwtCookie, setJwtCookie] = useState("")
     const navigate = useNavigate();
+
+    const makeCookie = (cookie) => {
+        Cookies.set("jwt-cookie", cookie)
+    }
 
 
     const handleOnChange = (evt) => {
@@ -30,17 +36,22 @@ export default function LoginUser(){
         const postUser = { ...user };
         axios.post("http://localhost:3000/login", postUser)
             .then((response) => {
-                setPostResponse(<p>{response.data}</p>);
-                if (response.data === "You are loged in!!!") {
-                    
+                setPostResponse(<p>{response.data.message}</p>);
+                if (response.data.message === "You are loged in!!!") {
+                    const jwtCookie = makeCookie(response.data.token)
+                    setJwtCookie(jwtCookie)
+
                     navigate("/main");
+
                 }
             })
             .catch((error) => {
                 console.error("Error occurred while logging in:", error);
                 setPostResponse("Error occurred while logging in.");
             });
-    };
+            
+            
+    }; 
 
     const postUser = async (evt) => {
         evt.preventDefault()
@@ -51,7 +62,7 @@ export default function LoginUser(){
             password: "",
         })
     }
-
+ 
     
 
     return(

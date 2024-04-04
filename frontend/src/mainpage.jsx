@@ -1,8 +1,17 @@
 
 import { Link } from 'react-router-dom';
-
+import Cookies from 'js-cookie';
+import { useNavigate } from 'react-router-dom';
 
 export default function MainPage(){
+  const navigate = useNavigate()
+
+  const logout = () => {
+    Cookies.remove("jwt-cookie")
+    navigate("/")
+  }
+
+
   return(
       
     <div className="homepage">
@@ -75,11 +84,12 @@ export default function MainPage(){
         </div>
       </div>
 
-        
+        <button onClick={logout}>Logout</button>
         <Link to="/register">
           <button>Register</button>
         </Link>
       </div>
+      
     
     )
 }

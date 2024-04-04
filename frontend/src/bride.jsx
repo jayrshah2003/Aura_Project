@@ -1,22 +1,11 @@
 import { Link } from 'react-router-dom';
 import ClothCard from './ClothCard';
 import { clothes } from "./data/clothes"; 
-// import { useState } from "react";
-
-// import { useNavigate } from 'react-router-dom';
 
 
-export default function Bride() {
+
+export default function Bride({addToCart}) {
     const brideClothes = clothes.filter(item => item.type === 'Bride');
-    // const [cartList, setCartList] = useState([]);
-
-    // // const navigate = useNavigate();
-
-    // const handleAddToCart = (item) => {
-    //     setCartList((prevList) => {
-    //       return [...prevList, { ...item, id: crypto.randomUUID() }];
-    //     });
-    //   };
 
     return (
         <div>
@@ -29,17 +18,19 @@ export default function Bride() {
             </Link>
             <h1>Bride Collection</h1>
             <div className="inventory-container">
-                {brideClothes.map(item => (
-                    <ClothCard
-                        key={item.id}
-                        name={item.name}
-                        price={item.price}
-                        size={item.size}
-                        image={item.image}
-                        brand={item.brand}
-                        // onRentClick={() => handleAddToCart(item)}
-                    />          
-                           
+        {brideClothes.map((item) => (
+          <div className="productCard" key={item.id}>
+            <ClothCard
+              key={item.id}
+              name={item.name}
+              price={item.price}
+              size={item.size}
+              image={item.image}
+              brand={item.brand}
+              addToCart={addToCart}     
+                    
+            />
+          </div>
                     
                 ))}
                 
