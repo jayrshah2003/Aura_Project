@@ -1,4 +1,4 @@
-
+// import {jwtDecode} from "jwt-decode";
 import { Link } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router-dom';
@@ -11,12 +11,23 @@ export default function MainPage(){
     navigate("/")
   }
 
+  // const token = Cookies.get("jwt-cookie")
+  // const decoded = jwtDecode(token)
+  // const u = decoded.id
+
 
   return(
       
     <div className="homepage">
+       
+        <div className='welcome'>
+          <p>Welcome to Aura</p>
+          <Link to="/login"><button onClick={logout}>Logout</button></Link>
+        <Link to="/register">
+          <button>Register</button>
+        </Link>
+        </div>
         < img src = "/image/AuraLogo.png" alt="logo" width ="200" />
-
       <div className="category-container">
         <div className="category">      
         <Link to="/bride">
@@ -84,10 +95,7 @@ export default function MainPage(){
         </div>
       </div>
 
-        <button onClick={logout}>Logout</button>
-        <Link to="/register">
-          <button>Register</button>
-        </Link>
+        
       </div>
       
     

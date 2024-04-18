@@ -5,6 +5,9 @@ export default function Checkout() {
   const [creditCardNumber, setCreditCardNumber] = useState('');
   const [cvv, setCVV] = useState('');
   const [expiryDate, setExpiryDate] = useState('');
+  const [address, setAddress] = useState('');
+  const [city, setCity] = useState('');
+  const [zipCode, setZipCode] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
   const handleCreditCardChange = (event) => {
@@ -19,29 +22,35 @@ export default function Checkout() {
     setExpiryDate(event.target.value);
   };
 
+  const handleAddressChange = (event) => {
+    setAddress(event.target.value);
+  };
+
+  const handleCityChange = (event) => {
+    setCity(event.target.value);
+  };
+
+  const handleZipCodeChange = (event) => {
+    setZipCode(event.target.value);
+  };
+
   const handleCheckout = () => {
-    if (creditCardNumber.length !== 16) {
-      setErrorMessage('Please enter a valid 16-digit credit card number.');
+    // Your existing checkout logic here
+
+    // Additional validation or processing related to address if needed
+
+    // Example: If any of the address fields are empty
+    if (!address || !city || !zipCode) {
+      setErrorMessage('Please fill out all address fields.');
       return;
     }
 
-    if (cvv.length !== 3 && cvv.length !== 4) {
-      setErrorMessage('Please enter a valid 3 or 4-digit CVV.');
-      return;
-    }
-
-    const currentDate = new Date();
-    const [month, year] = expiryDate.split('/');
-    const expiry = new Date(`20${year}`, month - 1);
-    if (expiry < currentDate) {
-      setErrorMessage('Please enter a valid expiry date.');
-      return;
-    }
+    // Proceed with checkout if all validations pass
   };
 
   return (
     <div className="checkout">
-      < img src = "/image/AuraLogo.png" alt="logo" width ="200" />
+      <img src="/image/AuraLogo.png" alt="logo" width="200" />
       <h1>Checkout</h1>
       <div>
         <label htmlFor="creditCardNumber">Credit Card Number:</label>
@@ -70,6 +79,33 @@ export default function Checkout() {
           onChange={handleExpiryDateChange}
           placeholder="MM/YYYY"
           maxLength="7"
+        />
+      </div>
+      <div>
+        <label htmlFor="address">Address:</label>
+        <input
+          type="text"
+          id="address"
+          value={address}
+          onChange={handleAddressChange}
+        />
+      </div>
+      <div>
+        <label htmlFor="city">City:</label>
+        <input
+          type="text"
+          id="city"
+          value={city}
+          onChange={handleCityChange}
+        />
+      </div>
+      <div>
+        <label htmlFor="zipCode">ZIP Code:</label>
+        <input
+          type="text"
+          id="zipCode"
+          value={zipCode}
+          onChange={handleZipCodeChange}
         />
       </div>
       {errorMessage && <p className="error-message">{errorMessage}</p>}
