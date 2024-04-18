@@ -1,8 +1,10 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom'; // Import useNavigate hook
+import Cookies from "js-cookie"
 
 export default function AddToCart({ cartItems, setCartItems }) {
   const totalPrice = cartItems.reduce((acc, curr) => acc + parseFloat(curr.price.replace(/\D/g, '')), 0);
   const totalItems = cartItems.length;
+  const navigate = useNavigate(); // Use useNavigate hook for navigation
 
   const removeItem = (index) => {
     const updatedCartItems = [...cartItems];
@@ -12,6 +14,21 @@ export default function AddToCart({ cartItems, setCartItems }) {
 
   const emptyCart = () => {
     setCartItems([]);
+  };
+
+  const jwtCookie = Cookies.get('jwt-cookie');
+
+  const handleCheckoutClick = () => {
+    console.log('JWT Cookie:', jwtCookie);
+    if (jwtCookie) {
+      console.log('User is logged in. Proceeding to checkout...');
+      // User is logged in, proceed to checkout
+      navigate('/checkout'); // Navigate to the checkout page
+    } else {
+      console.log('User is not logged in. Redirecting to login page...');
+      // User is not logged in, redirect to login page
+      window.location.href = '/login'; // or navigate to '/login' using React Router if you prefer
+    }
   };
 
   return (
@@ -35,9 +52,7 @@ export default function AddToCart({ cartItems, setCartItems }) {
           <p className="total">Total Items: {totalItems}</p>
           <p className="total">Total Price: ${totalPrice.toFixed(2)}</p> 
           <button onClick={emptyCart}>Empty Cart</button> {/* Button to empty the entire cart */}
-          <Link to="/checkout">
-            <button>Proceed to Checkout</button>
-          </Link>
+          <button onClick={handleCheckoutClick}>Proceed to Checkout</button> {/* Button to proceed to checkout */}
         </div>
       )}
       <Link to="/">

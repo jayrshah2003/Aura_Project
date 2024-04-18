@@ -14,7 +14,9 @@ import CreateUser from "./pages/CreateUser";
 import LoginUser from "./pages/LoginUser";
 import PrivateRoutes from "../utilities/PrivateRoutes";
 import NotAuthorized from "./pages/NotAuthorized";
+import Checkout from "./checkout";
 import AddToCart from "./AddToCart";
+import OrderConfirmation from "./OrderConfirmation";
 //hii
 function App() {
 
@@ -46,6 +48,9 @@ function App() {
     <Route path="/login" element={<LoginUser />} />
     <Route path="/not-authorized" element={<NotAuthorized />} />
     <Route path="/cart" element={<AddToCart cartItems={cartItems} setCartItems={setCartItems} />} />
+    <Route path="/checkout" element={<Checkout />} /> {/* Route for the Checkout page */}
+    <Route path="/order-confirmation" element={<OrderConfirmation />} />
+
 
     <Route path="/register" element={<CreateUser />} />
 
